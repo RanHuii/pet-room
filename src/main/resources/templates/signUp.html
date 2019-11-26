@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<h2>Signup form</h2>
+<form th:action="@{/signUp}" th:object="${user}" class="form-horizontal" id="add-user-form" method="post">
+    <div class="form-group has-feedback">
+        <p>First name<input type="text" th:field="*{firstName}"></p>
+        <p>Last name<input type="text" th:field="*{lastName}"></p>
+        <p>City location<input type="text" th:field="*{city}"></p>
+        <p>telephone<input type="text" th:field="*{telephone}"></p>
+        <p>username<input type="text" th:field="*{username}"></p>
+        <p>password<input type="password" th:field="*{password}"></p>
+    </div>
+    <div class="col-sm-offset-2 col-sm-10">
+        <input type="submit" value="Submit">
+        <input type="reset" value="reset">
+    </div>
+</form>
+</body>
+</html>

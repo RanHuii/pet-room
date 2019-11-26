@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="../static/resources/css/header.css" th:href="@{/resources/css/header.css}">
+    <title>Welcome</title>
+</head>
+<body>
+    <div th:replace="fragments/header :: header">2</div>
+    <div th:replace="fragments/example :: divide ">1</div>
+    <h1>Welcome to pet room</h1>
+    <img src="../static/resources/images/Welcome2.png" th:src="@{/resources/images/Welcome2.png}" width="1800" height="1000">
+</body>
+</html>

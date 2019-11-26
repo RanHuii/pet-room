@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../static/resources/css/header.less" th:href="@{/resources/css/header.less}">
+</head>
+<body>
+<ul th:fragment="header">
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a></li>
+    <li style="float:right"><a class="active" href="../signUp.html" th:href="@{/signUp}">Sign up</a></li>
+    <li style="float:right"><a class="active" href="../login.html" th:href="@{/login}">Login</a></li>
+</ul>
+
+</body>
+</html>
+
