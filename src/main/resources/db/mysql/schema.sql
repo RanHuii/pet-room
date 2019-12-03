@@ -1,19 +1,18 @@
 CREATE DATABASE IF NOT EXISTS petstagram;
 
-/*GRANT ALL PRIVILEGES ON petstagram.* TO pc@localhost IDENTIFIED BY 'pc';*/
-
 USE petstagram;
 
 CREATE TABLE IF NOT EXISTS users(
     id INT(4) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(30) UNIQUE,
-    password varchar(30),
+    username VARCHAR(30) UNIQUE NOT NULL ,
+    password varchar(255),
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     city VARCHAR(80),
     telephone VARCHAR(20),
     INDEX(last_name)
 );
+
 
 CREATE TABLE IF NOT EXISTS pets(
     id INT(4) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,

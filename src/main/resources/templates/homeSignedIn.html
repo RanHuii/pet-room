@@ -6,9 +6,8 @@
     <title>Welcome</title>
 </head>
 <body>
-
-    <div th:replace="fragments/header :: header">2</div>
-    <h1>Welcome to pet room</h1>
-    <img src="../static/resources/images/Welcome2.png" th:src="@{/resources/images/Welcome2.png}" width="1800" height="1000">
+<h1 align="middle" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<div th:replace="fragments/header :: headerSignedIn">2</div>
+<img src="../static/resources/images/Welcome2.png" th:src="@{/resources/images/Welcome2.png}" width="1800" height="1000">
 </body>
 </html>

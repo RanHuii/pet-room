@@ -2,6 +2,9 @@ package petroom.user;
 
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import petroom.model.Person;
 
 import javax.persistence.*;
@@ -11,14 +14,15 @@ import java.util.*;
 
 
 @Entity
-@Table(name = "users")
-public class User extends Person {
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
+public class User extends Person implements UserDetails {
+
 
     @Column(name = "city")
     @NotEmpty
     private String city;
 
-    @Column(name = "userName")
+    @Column(name = "username")
     @NotEmpty
     private String username;
 
@@ -34,14 +38,40 @@ public class User extends Person {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Pet> pets;
 
+    @Override
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -89,7 +119,6 @@ public class User extends Person {
         }
         pet.setUser(this);
     }
-
 
     public boolean isNew(Pet pet) {
         for (Pet petty : pets) {

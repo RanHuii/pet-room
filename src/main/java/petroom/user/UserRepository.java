@@ -1,6 +1,7 @@
 package petroom.user;
 
-        import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,9 @@ public interface UserRepository extends Repository<User, Integer> {
 
     //Query user by its username
     User findUserByUsername(@Param("username") String username);
+
+    @Query("select user from User user where user.username =:username")
+    User findByUsername(@Param("username") String username);
     /**
     * Save a user to the database
     **/

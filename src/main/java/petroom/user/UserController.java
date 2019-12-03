@@ -1,5 +1,7 @@
 package petroom.user;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +40,10 @@ public class UserController {
         if (result.hasErrors()) {
             return VIEWS_USER_CREATE_FORM;
         }
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         this.users.save(user);
+
         return "redirect:/login";
     }
 
@@ -50,20 +55,19 @@ public class UserController {
             return "login";
     }
 
-    @PostMapping("/login")
-        public String loginSumbit(@Valid Login login, BindingResult result){
-            if(result.hasErrors()){
-                return "login";
-            }
-            User matchedUser = users.findUserByUsername(login.getUsername());
-            if(matchedUser.getPassword().equals(login.getPassword()))
-            {
-                return "success";
-            }
-            else
-            {
-                return "LoginFail";
-            }
-        }
+    @GetMapping("/homeSignedIn")
+    public String loggedInPage(){
+        return "homeSignedIn";
+    }
+
+    @GetMapping("/login?error")
+    public String loginError(){
+        return "login?error";
+    }
+
+    @GetMapping("/signOut")
+    public String signOutPage(){
+        return "signOut";
+    }
 
 }
